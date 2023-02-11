@@ -1,0 +1,24 @@
+ROUTER :
+1.) enable
+2.) configure terminal
+3.) interface
+4.) ip address ip subnet mask
+5.) no shutdown
+
+Switch :
+1.) enable
+2.) configure terminal
+3.) interface 
+4.) ip address ip subnet mask
+5.) no shutdown
+6.) ip default-gateway ipgateway 
+7.) end
+
+PC :
+1.) enable
+2.) configure terminal
+3.) interface 
+4.) ip address ip subnet mask
+5.) no shutdown
+6.) ip default-gateway ipgateway 
+7.) end

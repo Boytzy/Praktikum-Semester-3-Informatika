@@ -1,0 +1,31 @@
+pertama, klik SWA, SWB, SWC
+- enable
+- conf term
+- vlan (vlan)
+- name vlan sesuai tabel
+
+- do show vlan brief (untuk ngecek)
+
+- interface F0/1 (sampai selanjutnya sesuai tabel)
+- switch mode access 
+- switch access vlan(sesuai tabel)
+
+- (khusus swc) interface F0/4 
+- (khusus swc) mls qos trust cos
+- (khusus swc) switch voice vlan 40
+
+- interface vlan 99 (di SWA, SWB, SWC)
+- ip address ip subnet mask (sesuai tabel)
+- no shutdown
+
+- (SWA, SWB)
+- interface G0/1
+- switch mode trunk
+- switch nonegotiate
+- switch trunk native vlan 100
+
+- (Khusus SWA, SWC) 
+- interface G0/2
+- switch mode trunk
+- switch mode dynamic desirable
+- switch trunk native vlan 100

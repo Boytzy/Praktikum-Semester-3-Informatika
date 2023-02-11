@@ -1,0 +1,51 @@
+en 
+conf t
+int range g0/1 - 2
+sw mode trunk
+sw nonegotiate
+vlan 100
+name Native
+exit
+int range g0/1-2
+sw trunk native vlan 100
+exit
+
+int range fa0/3-9, fa0/11-23
+shutdown
+exit
+vlan 999 
+name BlackHole
+exit
+int range fa0/3-9, fa0/11-23
+sw access vlan 999
+exit
+int range fa0/1 - 2, fa0/10, fa0/24
+sw mode access
+sw port-security maximum 4
+exit
+int fa0/1
+sw port-security mac-address 0010.11E8.3CBB
+exit
+int range fa0/1 - 2, fa0/10, fa0/24
+sw port-security 
+sw port-security mac-address sticky
+sw port-security violatioan restrict
+exit
+
+int range g0/1-2
+ip dhcp snooping trust
+exit
+
+int range fa0/1 - 2, fa0/10, fa0/24
+ip dhcp snooping limit rate 5
+exit
+ip dhcp snooping
+int range fa0/1 - 2, fa0/10, fa0/24
+spanning-tree portfast
+spanning-tree bpduguard enable
+
+SW 2
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,99
+spanning-tree portfast default
+
