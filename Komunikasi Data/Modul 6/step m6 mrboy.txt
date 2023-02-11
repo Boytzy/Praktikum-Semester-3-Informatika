@@ -1,0 +1,61 @@
+Router RTA
+enable
+config terminal
+hostname RTA (configure Hostname)
+interface g0/0
+ip address 172.16.1.1 255.255.255.0
+no shutdown
+exit
+
+service password-encryption 
+security password min-length 10
+
+enable secret itexamanswers (create password)
+no ip domain-lookup
+ip domain-name CCNA.com
+username jony secret itexamanswers.net
+crypto key generate rsa
+1024
+
+login block-for 180 attempts 4 within 120
+
+line vty 0 4 (Konfigurasikan semua jalur VTY untuk akses SSH dan gunakan profil pengguna lokal untuk autentikasi.)
+transport input ssh 
+login local
+exec-timeout 6 (Atur batas waktu mode EXEC menjadi 6 menit pada jalur VTY.)
+end
+
+copy running-config startup-config 
+
+
+
+Switch SW1
+enable
+config terminal
+hostname SW1
+
+interface vlan 1
+ip address 172.16.1.2 255.255.255.0
+no shutdown
+exit
+
+ip default-gateway 172.16.1.1 
+interface range F0/2-24, G0/2 (menonaktifkan semua port switch yg tdk digunakan)
+shutdown
+exit
+
+service password-encryption 
+enable secret class 
+no ip domain-lookup (disable dns lookup)
+ip domain-name CCNA.com
+username admin_switch secret p@ssword
+crypto key generate rsa
+1024
+
+line vty 0 15 (Konfigurasikan semua jalur VTY untuk akses SSH dan gunakan profil pengguna lokal untuk autentikasi.)
+transport input ssh 
+login local
+exec-timeout 6 (Atur batas waktu mode EXEC menjadi 6 menit pada jalur VTY.)
+end
+
+copy running-config startup-config
